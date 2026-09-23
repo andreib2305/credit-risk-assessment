@@ -1,5 +1,4 @@
 import pandas as pd
-from sklearn import metrics
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import StandardScaler
@@ -9,7 +8,6 @@ class NeuralNetworkEval:
 
     def __init__(self, random_state: int = 42):
         self.random_state = random_state
-
         self.scaler = StandardScaler()
         self.model = MLPClassifier(
             hidden_layer_sizes=(16, 8),
@@ -18,7 +16,6 @@ class NeuralNetworkEval:
         )
 
     def train_and_eval(self, df: pd.DataFrame) -> dict:
-
         x = df[['Age', 'Income', 'Credits', 'Late_payments']]
         y = df['Risk']
 
@@ -41,12 +38,10 @@ class NeuralNetworkEval:
         return metrics
 
     def predict_client(self, client_data: dict) -> tuple[int, str]:
-
         client_df = pd.DataFrame([client_data])
-
         client_scaled = self.scaler.transform(client_df)
-
         pred_class = self.model.predict(client_scaled)[0]
+
         pred_label = "Высокий риск (1)" if pred_class == 1 else "Низкий риск (0)"
 
         return pred_class, pred_label

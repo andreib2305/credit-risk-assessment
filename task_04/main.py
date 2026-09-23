@@ -1,5 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import os
+
+output_dir = "charts"
+os.makedirs(output_dir, exist_ok=True)
 
 months = np.arange(1, 13)
 product_a = [120, 135, 148, 162, 175, 190, 210, 225, 240, 260, 275, 300]
@@ -19,7 +23,7 @@ ax.grid(True, linestyle=':', alpha=0.6)
 ax.legend(fontsize=11)
 
 plt.tight_layout()
-plt.savefig('sales_line.png', dpi=300)
+plt.savefig(f'{output_dir}/sales_line.png', dpi=300)
 plt.close()
 
 
@@ -43,7 +47,7 @@ ax.bar_label(rects2, padding=3, fontsize=8, rotation=45)
 ax.set_ylim(0, max(product_a) * 1.15)
 
 plt.tight_layout()
-plt.savefig('sales_bar.png', dpi=300)
+plt.savefig(f'{output_dir}/sales_bar.png', dpi=300)
 plt.close()
 
 
@@ -73,7 +77,7 @@ cbar.set_label('Номер месяца', fontsize=11)
 cbar.set_ticks(months)
 
 plt.tight_layout()
-plt.savefig('sales_scatter.png', dpi=300)
+plt.savefig(f'{output_dir}/sales_scatter.png', dpi=300)
 plt.close()
 
 print("Все графики успешно построены и сохранены в файлы!")
